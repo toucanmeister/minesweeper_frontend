@@ -1,0 +1,79 @@
+#container {
+  width: 300px;
+  margin: auto;
+  margin-bottom: 50px;
+}
+#startButton {
+  width: 60px;
+  height: 20px;
+  padding: 8px;
+  margin: auto;
+  background-color: mediumseagreen;
+  clear: both;
+  text-align: center;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 100%;
+  border-radius: 30px;
+}
+#startdiv {
+  margin: 3px auto auto;
+}
+#inputContainer {
+  position: relative;
+  right: 7px;
+  clear: both;
+  width: 180px;
+  height: 150px;
+  margin: 30px auto;
+  background-color: #1e1e1e;
+  padding: 30px 30px 10px;
+  text-align: center;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 80%;
+  color: white;
+  border-radius: 60px;
+}
+.banner {
+  position: fixed;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 200%;
+  height: 80px;
+  margin: auto;
+  width: 800px;
+  border-radius: 80px;
+  left: 30%;
+  top: 10%;
+  padding-top: 50px;
+  text-align: center;
+}
+#die {
+  background-color: rgba(255, 99, 71, 0.5);
+  color: white;
+}
+#win {
+  background-color: rgba(48, 160, 81, 0.5);
+  color: white;
+}
+.cell {
+  opacity: 0.5;
+  width: 30px;
+  height: 30px;
+  border: 3px solid grey;
+  float:left;
+  background-color: lightgrey;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 150%;
+  text-align: center
+}
+.row {
+  clear: both;
+}
+input {
+  border-radius: 5px;
+  margin-top: 4px;
+}
+

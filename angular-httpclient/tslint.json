@@ -6,6 +6,10 @@
   "rules": {
     "array-type": false,
     "arrow-parens": false,
+    "no-trailing-whitespace": false,
+    "whitespace": false,
+    "typedef-whitespace": false,
+    "quotemark": false,
     "deprecation": {
       "severity": "warn"
     },
@@ -56,10 +60,6 @@
     ],
     "object-literal-sort-keys": false,
     "ordered-imports": false,
-    "quotemark": [
-      true,
-      "single"
-    ],
     "trailing-comma": false,
     "no-output-on-prefix": true,
     "use-input-property-decorator": true,

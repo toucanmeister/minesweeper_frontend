@@ -1,3 +1,4 @@
+<title>Minesweeper</title>
 <div id="gameContainer">
 
   <div id="container" [ngStyle]=" {'width': 38*numberOfRows+'px', 'margin-top': 18*numberOfRows+'px'}">
@@ -12,10 +13,10 @@
     </div>
   </div>
   <div id="inputContainer">
-    Größe (Zellen pro Seite): <br>
-    <input type="number" min="1" [(ngModel)]="inputNumberOfRows"> <br> <br>
-    Anzahl an Minen: <br>
-    <input type="number" min="1" [(ngModel)]="inputNumberOfMines"> <br> <br>
+    <label for="rowInput"> Größe (Zellen pro Seite):</label> <br>
+    <input id="rowInput" type="number" min="1" [(ngModel)]="inputNumberOfRows"> <br> <br>
+    <label for="minesInput">Anzahl an Minen:</label> <br>
+    <input id="minesInput" type="number" min="1" [(ngModel)]="inputNumberOfMines"> <br> <br>
     <div id="startButton" (click)="startGame()"><div id="startdiv">Start</div></div>
   </div>
   <div class="banner" id="die" *ngIf="!alive && !gameStarted"> Du hast verloren. </div>

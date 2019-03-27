@@ -1,7 +1,6 @@
 #container {
   width: 300px;
-  margin: auto;
-  margin-bottom: 50px;
+  margin: auto auto 50px;
 }
 #startButton {
   width: 60px;
@@ -36,7 +35,6 @@
   border-radius: 60px;
 }
 .banner {
-  position: fixed;
   font-family: sans-serif;
   font-weight: bold;
   font-size: 200%;
@@ -44,7 +42,7 @@
   margin: auto;
   width: 800px;
   border-radius: 80px;
-  left: 30%;
+  left: 25%;
   top: 10%;
   padding-top: 50px;
   text-align: center;
@@ -75,5 +73,8 @@
 input {
   border-radius: 5px;
   margin-top: 4px;
+}
+label {
+  color: lightgrey;
 }
 

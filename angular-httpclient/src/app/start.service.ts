@@ -26,7 +26,7 @@ export class StartService {
 
     console.log(rowSize, numOfMines);
     return this.http
-      .post<Start>("http://localhost:8081/minesweeper-service/start","{\"rowSize\": " + rowSize + ", \"numOfMines\": " + numOfMines + "}", httpOptions)
+      .post<Start>("http://localhost:8081/minesweeper-service/start","{\"numberOfRows\": " + rowSize + ", \"numberOfMines\": " + numOfMines + "}", httpOptions)
       .pipe(map(data => {
         this.start = data;
         return this.start;

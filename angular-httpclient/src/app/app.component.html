@@ -5,7 +5,7 @@
       <div class="row">
         <div *ngFor="let x of counter(numberOfRows)">
           <div class="cell" (click)="clickCell((y*(numberOfRows-1)) + y + x)"
-                            (contextmenu)="flagCell((y*(numberOfRows-1)) + y + x)"
+                            (contextmenu)="$event.preventDefault(); flagCell((y*(numberOfRows-1)) + y + x);"
                             [ngStyle]=" {'background-color': cellColor[(y*(numberOfRows-1)) + y + x], 'opacity': cellOpacity}"> {{neighborMines[(y*(numberOfRows-1)) + y + x]}} </div>
         </div>
       </div>
@@ -13,10 +13,10 @@
   </div>
   <div id="inputContainer">
     Größe (Zellen pro Seite): <br>
-    <input type="number" min="1" [ngModel]="numberOfRows"> <br> <br>
+    <input type="number" min="1" [(ngModel)]="inputNumberOfRows"> <br> <br>
     Anzahl an Minen: <br>
-    <input type="number" min="1" [ngModel]="numOfMines"> <br> <br>
-    <div id="startButton" (click)="startGame(numberOfRows, numOfMines)"><div id="startdiv">Start</div></div>
+    <input type="number" min="1" [(ngModel)]="inputNumberOfMines"> <br> <br>
+    <div id="startButton" (click)="startGame()"><div id="startdiv">Start</div></div>
   </div>
   <div class="banner" id="die" *ngIf="!alive && !gameStarted"> Du hast verloren. </div>
   <div class="banner" id="win" *ngIf="winner && !gameStarted"> Du hast gewonnen! </div>

@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
 interface Start {
   size: number;
   numberOfRows: number;
+  numberOfMines: number;
 }
 
 @Injectable({
@@ -23,6 +24,7 @@ export class StartService {
       })
     };
 
+    console.log(rowSize, numOfMines);
     return this.http
       .post<Start>("http://localhost:8081/minesweeper-service/start","{\"rowSize\": " + rowSize + ", \"numOfMines\": " + numOfMines + "}", httpOptions)
       .pipe(map(data => {

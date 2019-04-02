@@ -5,8 +5,7 @@ import {map} from 'rxjs/operators';
 interface Click {
   alive: boolean;
   winner: boolean;
-  numOfNeighborMines: [];
-  clickedCells: [];
+  clickedCellsWithMineCount: [][];
   mines: [];
   okay: boolean;
 }

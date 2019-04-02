@@ -43,12 +43,23 @@ export class AppComponent implements OnInit{
 
   startGame(){
 
-    if(this.inputNumberOfRows === undefined || this.inputNumberOfRows === null || this.inputNumberOfRows*this.inputNumberOfRows < this.inputNumberOfMines) this.inputNumberOfRows = 8;
-    if(this.inputNumberOfMines === undefined || this.inputNumberOfMines === null || this.inputNumberOfRows*this.inputNumberOfRows < this.inputNumberOfMines) this.inputNumberOfMines = 10;
+    if(this.inputNumberOfRows === undefined ||
+       this.inputNumberOfRows === null ||
+       this.inputNumberOfRows*this.inputNumberOfRows < this.inputNumberOfMines ||
+       this.inputNumberOfRows < 1) {
+        this.inputNumberOfRows = 8;
+    }
+    if(this.inputNumberOfMines === undefined ||
+      this.inputNumberOfMines === null ||
+      this.inputNumberOfRows*this.inputNumberOfRows < this.inputNumberOfMines ||
+      this.inputNumberOfMines < 1) {
+        this.inputNumberOfMines = 10;
+    }
 
-    this.Starter.createBoard(this.inputNumberOfRows, this.inputNumberOfMines)
-      .subscribe(data => this.numberOfRows = data.numberOfRows);
-    this.size = this.numberOfRows * this.numberOfRows;
+    this.Starter.createBoard(this.inputNumberOfRows, this.inputNumberOfMines).subscribe();
+    this.numberOfRows = this.inputNumberOfRows;
+    this.numOfMines = this.inputNumberOfMines;
+    this.size = this.inputNumberOfRows * this.inputNumberOfRows;
     this.gameStarted = true;
     this.cellOpacity = 1;
     this.numOfMines = this.inputNumberOfMines;
@@ -68,7 +79,7 @@ export class AppComponent implements OnInit{
           if(data.okay){
             this.alive = data.alive;
             this.winner = data.winner;
-            this.displayClickAndNeighborMines(cellNum, data.clickedCells, data.numOfNeighborMines);
+            this.displayClickAndNeighborMines(cellNum, data.clickedCellsWithMineCount);
           }
           if(!(this.alive) || this.winner){
             this.gameStarted = false;
@@ -98,15 +109,15 @@ export class AppComponent implements OnInit{
 
   }
 
-  displayClickAndNeighborMines(cellNum: number, clickedCells: number[], numOfNeighborMines: number[]){
+  displayClickAndNeighborMines(cellNum: number, clickedCellsWithMineCount: number[][]){
     let i: number;
-    for(i = 0; i < clickedCells.length; i++){
-      let currentClickedCell = clickedCells[i];
+    for(i = 0; i < clickedCellsWithMineCount[0].length; i++){
+      let currentClickedCell = clickedCellsWithMineCount[0][i];
       this.cellColor[currentClickedCell] = "darkgrey";
-      if(numOfNeighborMines[i] === 0) {
+      if(clickedCellsWithMineCount[1][i] === 0) {
         this.neighborMines[currentClickedCell] = "";
       } else {
-        this.neighborMines[currentClickedCell] = numOfNeighborMines[i].toString();
+        this.neighborMines[currentClickedCell] = clickedCellsWithMineCount[1][i].toString();
       }
     }
   }

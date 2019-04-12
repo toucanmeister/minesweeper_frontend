@@ -12,18 +12,12 @@ import {OnInit} from '@angular/core';
 })
 export class AppComponent implements OnInit{
 
-  inputNumberOfRows: number = 8;
-  inputNumberOfMines: number = 10;
-
-  size: number;
+  size: number = 64;
   numberOfRows: number = 8;
-  numOfMines: number = 10;
-
+  numberOfMines: number = 10;
   cellOpacity: number = 0.3;
   cellColor = [];
-
   neighborMines = [];
-
   gameStarted: boolean = false;
   alive: boolean = true;
   winner: boolean = false;
@@ -33,7 +27,6 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(){
-    this.size = 64;
     let i: number;
     for(i = 0; i < this.size; i++){
       this.cellColor[i] = "lightgrey";
@@ -41,29 +34,12 @@ export class AppComponent implements OnInit{
     }
   }
 
-  startGame(){
+  startGame(event: any){
 
-    if(this.inputNumberOfRows === undefined ||
-       this.inputNumberOfRows === null ||
-       this.inputNumberOfRows*this.inputNumberOfRows < this.inputNumberOfMines ||
-       this.inputNumberOfRows < 1) {
-        this.inputNumberOfRows = 8;
-    }
-    if(this.inputNumberOfMines === undefined ||
-      this.inputNumberOfMines === null ||
-      this.inputNumberOfRows*this.inputNumberOfRows < this.inputNumberOfMines ||
-      this.inputNumberOfMines < 1) {
-        this.inputNumberOfMines = 10;
-    }
-
-    this.Starter.createBoard(this.inputNumberOfRows, this.inputNumberOfMines).subscribe();
-    this.numberOfRows = this.inputNumberOfRows;
-    this.numOfMines = this.inputNumberOfMines;
-    this.size = this.inputNumberOfRows * this.inputNumberOfRows;
-    this.gameStarted = true;
-    this.cellOpacity = 1;
-    this.numOfMines = this.inputNumberOfMines;
-
+    let rowInput: number = event.target.rowInput.value;
+    let minesInput: number = event.target.minesInput.value;
+    this.initializeBoardValues(rowInput, minesInput);
+    this.Starter.createBoard(this.numberOfRows, this.numberOfMines).subscribe();
     let i: number;
     for(i = 0; i < this.size; i++){
       this.cellColor[i] = "lightgrey";
@@ -72,7 +48,6 @@ export class AppComponent implements OnInit{
   }
 
   clickCell(cellNum: number){
-
     if(this.gameStarted && this.cellColor[cellNum] !== "tomato"){
       this.Clicker.sendClick(cellNum)
         .subscribe( data => {
@@ -123,7 +98,7 @@ export class AppComponent implements OnInit{
   }
 
   showMines(mines: number[]){
-    if(this.numOfMines === 0) return;
+    if(this.numberOfMines === 0) return;
     let i: number;
     for(i = 0; i < this.size; i++){
       if(mines.includes(i)){
@@ -137,6 +112,38 @@ export class AppComponent implements OnInit{
       this.cellColor[cellNum] = "lightgrey";
     } else if(this.cellColor[cellNum] === "lightgrey") {
       this.cellColor[cellNum] = "tomato";
+    }
+  }
+
+  inputIsInvalid(rows: number, mines: number): boolean {
+      if (rows === undefined || mines === undefined) {
+          return true;
+      }
+      if (rows < 1 || mines < 1) {
+          return true;
+      }
+      if (rows*rows < mines) {
+          return true;
+      }
+      return false;
+  }
+
+  initializeBoardValues(rowInput: number, minesInput: number) {
+    this.sanitizeAndSetInput(rowInput, minesInput);
+    this.size = this.numberOfRows * this.numberOfRows;
+    this.gameStarted = true;
+    this.cellOpacity = 1;
+  }
+
+  private sanitizeAndSetInput(rowInput: number, minesInput: number) {
+    if (this.inputIsInvalid(rowInput, minesInput)) {
+      this.numberOfRows = 8;
+      (<HTMLInputElement>document.getElementById("rowInput")).value = "8";
+      this.numberOfMines = 10;
+      (<HTMLInputElement>document.getElementById("minesInput")).value = "10";
+    } else {
+      this.numberOfRows = rowInput;
+      this.numberOfMines = minesInput;
     }
   }
 

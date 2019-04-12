@@ -7,18 +7,18 @@
         <div *ngFor="let x of counter(numberOfRows)">
           <div class="cell" id="{{y*numberOfRows + x}}" (click)="clickCell(y*numberOfRows + x)"
                             (contextmenu)="$event.preventDefault(); flagCell(y*numberOfRows + x);"
-                            [ngStyle]=" {'background-color': cellColor[y*numberOfRows + x], 'opacity': cellOpacity}"> {{neighborMines[y*numberOfRows + x]}} </div>
+                            [ngStyle]="{'background-color': cellColor[y*numberOfRows + x], 'opacity': cellOpacity}"> {{neighborMines[y*numberOfRows + x]}} </div>
         </div>
       </div>
     </div>
   </div>
-  <div id="inputContainer">
+  <form id="inputContainer" (ngSubmit)="startGame($event)">
     <label for="rowInput"> Größe (Zellen pro Seite):</label> <br>
-    <input id="rowInput" type="number" min="1" max="80" [(ngModel)]="inputNumberOfRows"> <br> <br>
+    <input id="rowInput" type="number" min="1" max="80" value = "8"> <br> <br>
     <label for="minesInput">Anzahl an Minen:</label> <br>
-    <input id="minesInput" type="number" min="1" max="6400" [(ngModel)]="inputNumberOfMines"> <br> <br>
-    <div id="startButton" (click)="startGame()"><div id="startdiv">Start</div></div>
-  </div>
+    <input id="minesInput" type="number" min="1" max="6400" value = "10"> <br> <br>
+    <button id="startButton" type="submit"><div id="startdiv">Start</div></button>
+  </form>
   <div class="banner" id="die" *ngIf="!alive && !gameStarted"> Du hast verloren. </div>
   <div class="banner" id="win" *ngIf="winner && !gameStarted"> Du hast gewonnen! </div>
 </div>

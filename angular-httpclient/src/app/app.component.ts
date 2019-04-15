@@ -81,7 +81,6 @@ export class AppComponent implements OnInit{
           }
         })
     }
-
   }
 
   displayClickAndNeighborMines(cellNum: number, clickedCellsWithMineCount: number[][]){
